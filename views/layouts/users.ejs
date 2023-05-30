@@ -1,0 +1,185 @@
+<div class="row">
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="mb-0">Usuarios</h3>
+                    </div>
+                    <div class="col text-right">
+                        <a href="#" class="btn bg-success text-white" data-toggle="modal" data-target="#addUser">Agregar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" class="sort">ID</th>
+                            <th scope="col" class="sort">Nombre</th>
+                            <th scope="col" class="sort">Email</th>
+                            <th scope="col" class="sort">Rol</th>
+
+                            <th scope="col" class="sort">Accion</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(Users.lenght !== 0){ %>
+                            <% Users.forEach(user => { %>
+                                <tr>
+                                    <td class="budget">
+                                        <%= user.id_user %>
+                                    </td>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm"><%= user.name_user%></span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        <%= user.email_user%>
+                                    </td>
+                                    <% if(user.rol_user == 'Administrador'){ %>
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                                  <i class="bg-success"></i>
+                                  <span class="status"><%= user.rol_user%></span>
+                                            </span>
+                                        </td>
+                                        <% }else if((user.rol_user == 'Moderador')){ %>
+                                            <td>
+                                                <span class="badge badge-dot mr-4">
+                                  <i class="bg-info"></i>
+                                  <span class="status"><%= user.rol_user%></span>
+                                                </span>
+                                            </td>
+                                            <% }else{ %>
+                                                <td>
+                                                    <span class="badge badge-dot mr-4">
+                                    <i class="bg-warning"></i>
+                                    <span class="status"><%= user.rol_user%></span>
+                                                    </span>
+                                                </td>
+                                                <% } %>
+                                                    <td class="text-right">
+                                                        <div class="dropdown">
+                                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <i class="fas fa-ellipsis-v"></i>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                                <a class="dropdown-item" data-toggle="modal" data-target="#editar" onclick="editar('<%= 
+                                       user.id_user %>','<%= user.name_user  %>','<%=  user.email_user%>','<%=  user.password_user%>','<%=  user.rol_user%>')">Editar</a>
+                                                                <a class="dropdown-item" href="/delete-user/<%= user.id_user%>">Eliminar</a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                </tr>
+                                <%});%>
+                                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="addUser" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form action="/create-user" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" class="form-control" name="name" id="name" aria-describedby="namehelp">
+                            <small id="namehelp" class="form-text text-muted">por favor introduza su nombre.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electronico</label>
+                            <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">Por favor introduzca su email.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" aria-describedby="passwordHelp" class="form-control" name="password" id="password">
+                            <small id="passwordHelp" class="form-text text-muted">Por favor introduzca su Contraseña.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="rol">Roles:</label>
+                            <select class="form-control" id="rol" name="rol">
+                  <option disabled >Seleccione:</option>
+                  <option value="Administrador">Administrador</option>
+                  <option value="Moderador">Moderador</option>
+                  <option value="Colaborador">Colaborador</option>
+                </select>
+                            <small class="form-text text-muted">Por favor introduzca seleccione el rol de la persona.</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Editar -->
+<div class="modal" id="editar" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form action="/update-user" method="POST">
+                        <input type="hidden" name="" id="id_edit">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" class="form-control" name="name" id="name_editar" aria-describedby="namehelp">
+                            <small id="namehelp" class="form-text text-muted">por favor introduza su nombre.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electronico</label>
+                            <input type="email" class="form-control" name="email" id="email_editar" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">Por favor introduzca su email.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" aria-describedby="passwordHelp" class="form-control" name="password" id="password_editar">
+                            <small id="passwordHelp" class="form-text text-muted">Por favor introduzca su Contraseña.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="rol">Roles:</label>
+                            <select class="form-control" id="rol_editar" name="rol">
+                  <option disabled selected>Seleccione:</option>
+                  <option value="Administrador">Administrador</option>
+                  <option value="Moderador">Moderador</option>
+                  <option value="Colaborador">Colaborador</option>
+                </select>
+                            <small class="form-text text-muted">Por favor introduzca seleccione el rol de la persona.</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+
+<script>
+    function editar(id, name, email, password, rol) {
+
+        document.getElementById('id_edit').value = id;
+        document.getElementById('name_editar').value = name;
+        document.getElementById('email_editar').value = email;
+        document.getElementById('password_editar').value = password;
+        document.getElementById('rol_editar').value = rol;
+
+    }
+</script>

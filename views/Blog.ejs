@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head.ejs')%>
+
+    <body>
+
+        <%- include('partials/header.ejs')%>
+
+            <main class="contenedor seccion contenido-centrado">
+                <% if(Blog){ %>
+
+                    <h1>
+                        <%= Blog.title_blog %>
+                    </h1>
+
+
+                    <picture>
+                        <!-- <source srcset="build/img/destacada2.webp" type="image/webp"> -->
+                        <source srcset="<%= Blog.image_blog %>" type="image/jpeg">
+                        <img loading="lazy" src="<%= Blog.image_blog %>" alt="imagen de la propiedad">
+                    </picture>
+
+                    <p class="informacion-meta">Escrito el: <span><%= Blog.fecha_blog %></span> </p>
+
+
+                    <div class="resumen-propiedad">
+                        <%- Blog.description_blog %>
+                    </div>
+                    <% } %>
+            </main>
+
+            <%- include('partials/footer.ejs'); %>
+
+
+    </body>
+
+</html>

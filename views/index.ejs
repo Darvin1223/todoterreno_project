@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/header-index.ejs') %>
+
+    <body>
+        <div id="google_element" class="google_elemente"></div>
+        <header class="Site-header inicio">
+            <div class="contenedor contenido-header">
+                <div class="barra">
+                    <a href="/" class="logo">
+                        <img src="img/logo.png" class="logo-logo" alt="logo de Bienes Raices" />
+                    </a>
+                    <nav class="navegacion">
+                        <!-- Propiedad target = "_blank" -->
+                        <a href="/">Inicio</a>
+                        <a href="/nosotros">Nosotros</a>
+                        <a href="/propiedades?page=1">Nuestras Propiedades</a>
+                        <a href="/blogs">Blog</a>
+                        <a href="/contacto">Contacto</a>
+                        <a href="/login">Iniciar Sesion</a>
+                    </nav>
+                </div>
+
+                <div class="contenido-header__text">
+                    <p class="contenido-header__text--title" translate="no">GRUPO TODO TERRENO</p>
+                    <h1>¡Eres parte del equipo! <br /></h1>
+                </div>
+            </div>
+        </header>
+
+        <section class="contenedor secction">
+            <h2 class="fw-300 centrar-texto">Mas sobre nosotros</h2>
+            <div class="Iconos-Nosotros">
+                <div class="Iconos">
+                    <img src="img/icono1.svg" alt="Icono Seguridad" />
+                    <h3>Seguridad</h3>
+                    <p>
+                        Sientete seguro haciendo tu Inversión inmobiliaria con nosotros. En todo terreno estamos 100% comprometido con el patrimonio de tu familia.
+                    </p>
+                    <p>
+                        Para nuestra agentes es importante tu comodidad y confianza al momento de hacer cualquier transancion con nuestro grupo inmoboliario.
+                    </p>
+
+                </div>
+
+                <div class="Iconos">
+                    <img src="img/icono2.svg" alt="Icono Mejor Precio" />
+                    <h3>El Mejor Precio</h3>
+                    <p>Trabajamos con propiedades a valor de mercado. Por esa razón todos nuestros proyectos pueden ser financiados y los tasadores autorizados por las distintas entidades bancarias garantizan nuestros precios.</p>
+                    <p>Además acompañamos a nuestros clientes que deseen financiar en todo el proceso del mismo. Brindandoles una asesoría constantes en el proceso. Ya sea para financiar o comprar de contado.</p>
+
+                </div>
+                <div class="Iconos">
+                    <img src="img/icono3.svg" alt="Icono A tiempo" />
+                    <h3>A Tiempo</h3>
+                    <p>
+                        Para el equipo de Todo Terreno Grupo Inmobiliario, valoramos el tiempo de ejecución de proceso de nuestros clientes.
+                    </p>
+                    <p>Nos esmeramos en cumplir la promesa de entregar en los plazos acordados y contratado.</p>
+                    <p>Te invitamos a ser parte de nuestra familia de clientes satisfechos.</p>
+                </div>
+            </div>
+        </section>
+
+        <main class="secction contenedor">
+            <h2 class="fw-300 centrar-texto">Casas y Apartamentos Destacados</h2>
+            <div class="contenedor-anuncios">
+                <div class="slider-uno glide">
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                            <% if(propiedadesASECD.lenght != 0){ %>
+                                <% propiedadesASECD.forEach(propiedadeASECD => { %>
+                                    <li class="glide__slide">
+                                        <div class="anuncios">
+                                            <img src="ImagenesPropiedades/<%= JSON.parse(propiedadeASECD.images_propiedad_approve)[0] %> " class="img_producto" alt="Anuncion de casa en el lago" />
+
+                                            <div class="contenido-anuncio">
+                                                <h3>
+                                                    <%= propiedadeASECD.name_propiedad_approve %>
+                                                </h3>
+                                                <p>
+                                                    <%= propiedadeASECD.extract_propiedad_approve %>
+                                                </p>
+                                                <p class="Precio"></p>
+                                                <ul class="iconos-caracteristicas">
+                                                    <li>
+                                                        <img src="img/icono_wc.svg" style="width: 50%" alt="icono_wc" />
+                                                        <p>
+                                                            <%= propiedadeASECD.bathroom_propiedad_approve %>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <img src="img/icono_estacionamiento.svg" style="width: 50%" alt="icono_estacionamiento" />
+                                                        <p>
+                                                            <%= propiedadeASECD.parking_propiedad_approve %>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <img src="img/icono_dormitorio.svg" style="width: 50%" alt="icono_dormitorio" />
+                                                        <p>
+                                                            <%= propiedadeASECD.bedrooms_propiedad_approve %>
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                                <a href="/propiedad?id=<%= propiedadeASECD.id_propiedad_approve  %>" class="boton boton-amarillo d-block">Ver Propiedad</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <%	}); %>
+                                        <% } %>
+                        </ul>
+                    </div>
+                    <div class="glide__arrows" data-glide-el="controls">
+                        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+                        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ver-todas">
+                <a href="/propiedades?page=1" class="boton boton-verde">Ver Todas</a>
+            </div>
+        </main>
+        <section class="secction contenedor">
+            <h2 class="fw-300 centrar-texto">Casas y Apartamentos</h2>
+            <div class="contenedor-anuncios">
+                <div class="slider-dos glide">
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                            <% if(propiedades.lenght != 0){ %>
+                                <% propiedades.forEach(propiedad => { %>
+                                    <li class="glide__slide">
+                                        <div class="anuncios">
+                                            <img src="ImagenesPropiedades/<%= JSON.parse(propiedad.images_propiedad_approve)[0] %> " class="img_producto" alt="Anuncion de casa en el lago" />
+
+                                            <div class="contenido-anuncio">
+                                                <h3>
+                                                    <%= propiedad.name_propiedad_approve %>
+                                                </h3>
+                                                <p>
+                                                    <%= propiedad.extract_propiedad_approve %>
+                                                </p>
+                                                <p class="Precio">
+                                                    <%= propiedad.price_propiedad_approve%>
+                                                </p>
+                                                <ul class="iconos-caracteristicas">
+                                                    <li>
+                                                        <img src="img/icono_wc.svg" alt="icono_wc" />
+                                                        <p>
+                                                            <%= propiedad.bathroom_propiedad_approve%>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <img src="img/icono_estacionamiento.svg" style="width: 50%" alt="icono_estacionamiento" />
+                                                        <p>
+                                                            <%= propiedad.parking_propiedad_approve%>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <img src="img/icono_dormitorio.svg" style="width: 50%" alt="icono_dormitorio" />
+                                                        <p>
+                                                            <%= propiedad.bedrooms_propiedad_approve%>
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                                <a href="/propiedad?id=<%= propiedad.id_propiedad_approve  %> " class="boton boton-amarillo d-block">Ver Propiedad</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <%}); %>
+                                        <% } %>
+                        </ul>
+                    </div>
+                    <div class="glide__arrows" data-glide-el="controls">
+                        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+                        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+                    </div>
+                </div>
+            </div>
+            <div class="ver-todas">
+                <a href="/propiedades?page=1" class="boton boton-verde">Ver Todas</a>
+            </div>
+        </section>
+        <section class="Imagen-contacto contenido-contacto">
+            <div class="contenedor">
+                <h2>Encuentra la casa de tus sueños</h2>
+                <p>Llena el formulario de contacto y un asesor se pondra en contacto con usted.</p>
+                <a href="/contacto" class="boton boton-amarillo">Contactanos</a>
+            </div>
+        </section>
+        <div class="seccion-inferior contenedor secction">
+            <section class="blog">
+                <h3 class="centrar-texto fw-300">Nuestro blog</h3>
+                <% if(blogs.length !== 0){ %>
+                    <% blogs.forEach(blog => { %>
+                        <article class="entrada-blog">
+                            <div class="imagen">
+                                <img src="<%=blog.image_blog %>" alt=" Imagen de <%=blog.title_blog %>" />
+                            </div>
+                            <div class="texto-entrada">
+                                <a href="/blog?id=<%=blog.id_blog%> ">
+                                    <h4>
+                                        <%=blog.title_blog %>
+                                    </h4>
+                                </a>
+                                <p>Escrito el: <span> <%=blog.fecha_blog%></span></p>
+                                <p class="extract">
+                                    <%=blog.extract_blog%>
+                                </p>
+                            </div>
+                        </article>
+                        <% }); %>
+                            <% } %>
+            </section>
+            <section class="testimoniales">
+                <h3 class="centrar-texto fw-300">Testimonios</h3>
+                <div class="testimonial">
+                    <blockquote>
+                        El personal se comporto de una excelente foorma, muy buena atencion y la casa que me ofrecieron cumplenn con todas mis expectativas.
+                    </blockquote>
+
+                    <p>- Darvin Rodriguez</p>
+                </div>
+            </section>
+        </div>
+        <footer clase="secction">
+            <div class="contenedor contenedor-footer">
+                <nav class="navegacion">
+                    <!-- Propiedad target = "_blank " -->
+                    <a href="/">Inicio</a>
+                    <a href="/nosotros">Nosotros</a>
+                    <a href="/propiedades">Propiedades</a>
+                    <a href="/blogs">Blog</a>
+                    <a href="/contacto">Contacto</a>
+                </nav>
+
+                <p class="copyright">Todos los derechos reservados &copy; 2007 -
+                    <%= new Date().getFullYear() %>
+                </p>
+            </div>
+        </footer>
+        <!-- GLIDE JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.5.0/glide.min.js" integrity="sha512-sRTWzFH9u9XGU6qNUQ8eFE6s6FXl/2L/nRJVwigW92TW8kC4eZCWsIKZTdfkIrCRyE8j0GwkTg8p+H76drV/WQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="js/index.js" type="module"></script>
+    </body>
+
+</html>

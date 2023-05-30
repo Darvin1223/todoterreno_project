@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head.ejs')%>
+
+    <body>
+        <%- include('partials/header.ejs')%>
+
+            <main class="secction contenedor">
+
+                <div class="browser">
+                    <input class="browser__search-input" type="search" name="title" autocomplete="not" placeholder="Buscar..." />
+                    <div class="filter">
+                        <input class="filter__select" list="provincias" id="provincia" name="province" placeholder="Provincia..." />
+                        <input class="filter__select" list="municipios" id="municipio" name="municipality" placeholder="Municipios..." />
+                        <button class="browser__search-button" type="submit">Buscar</button>
+                        <datalist id="provincias"></datalist>
+                        <datalist id="municipios"></datalist>
+                    </div>
+                </div>
+
+                <h2 class="fw-300 centrar-texto">Casas y Apartamentos en Ventas</h2>
+                <div class="contenedor-anuncios">
+                    <% if(propiedades.length !== 0){ %>
+                        <% propiedades.forEach(propiedad => { %>
+                            <div class="anuncios">
+                                <img src="ImagenesPropiedades/<%= JSON.parse(propiedad.images_propiedad_approve)[0] %>" class="img_producto" alt="Anuncion de casa en el lago" />
+                                <div class="contenido-anuncio">
+                                    <h3>
+                                        <%=propiedad.name_propiedad_approve%>
+                                    </h3>
+                                    <p>
+                                        <%- propiedad.name_propiedad_approve%>.</p>
+                                    <p class="Precio">
+                                        <%=propiedad.ads_price%>
+                                    </p>
+                                    <ul class="iconos-caracteristicas">
+                                        <li>
+                                            <img src="img/icono_wc.svg" alt="icono_wc" />
+                                            <p>
+                                                <%=propiedad.bathroom_propiedad_approve%>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <img src="img/icono_estacionamiento.svg" style="width: 50%" alt="icono_estacionamiento" />
+                                            <p>
+                                                <%=propiedad.bathroom_propiedad_approve%>
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <img src="img/icono_dormitorio.svg" style="width: 50%" alt="icono_dormitorio" />
+                                            <p>
+                                                <%=propiedad.bedrooms_propiedad_approve%>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                    <a href="/propiedad?id=<%=propiedad.id_propiedad_approve  %>" class="boton boton-amarillo d-block">Ver Propiedad</a>
+                                </div>
+                            </div>
+                            <% }); %>
+                                <% } %>
+                </div>
+
+                <div class="pagination">
+                    <a class="pagination__link pagination__link--prev" href="">Atras</a>
+                    <% console.log(paginas) %>
+                        <% for (let i = 0; i < paginas; i++) { %>
+                            <a data-btn-link class="pagination__link" href="propiedades?page=<%= i+1 %>">
+                                <%= i+1 %>
+                            </a>
+                            <% } %>
+                                <a class="pagination__link pagination__link--next" href="">Siguiente</a>
+                </div>
+            </main>
+
+            <%- include('partials/footer.ejs')%>
+                <script src="admin/js/provincias-propiedades.js"></script>
+                <script src="js/propiedades.js" type="module"></script>
+    </body>
+
+</html>

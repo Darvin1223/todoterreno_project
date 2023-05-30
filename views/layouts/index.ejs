@@ -1,0 +1,237 @@
+<div class="col-xl-12">
+    <div class="row">
+        <div class="col">
+            <div class="card col-12">
+                <!-- Card header -->
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Propiedades</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" class="sort" data-sort="name">Nombre</th>
+                                <th scope="col" class="sort" data-sort="budget">Precio</th>
+                                <th scope="col" class="sort" data-sort="status">Provincia</th>
+                                <th scope="col">Municipios</th>
+                                <th scope="col" class="sort" data-sort="completion">Tipo de viviendas</th>
+                                <th scope="col">Usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <% if(propiedades.lenght != 0){ %>
+                                <% propiedades.forEach(propiedad => { %>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+                                                <!-- <a href="#" class="avatar rounded-circle mr-3">
+                        <img alt="Image placeholder" src="ImagenesPropiedades/<%= JSON.parse(propiedad.images_propiedad_approve)[0]  %> ">
+                      </a> -->
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm"><%= propiedad.name_propiedad_approve %> </span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="budget">
+                                            <%= propiedad.price_propiedad_approve %>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                      <!-- <i class="bg-danger"></i> -->
+                      <span class="status"><%= propiedad.province_propiedad_approve %></span>
+                                            </span>
+                                        </td>
+                                        <!-- <td>
+                                            <div class="avatar-group">
+                                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                                                    <img alt="Image placeholder" src="/assets/img/theme/team-1.jpg">
+                                                </a>
+                                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
+                                                    <img alt="Image placeholder" src="/assets/img/theme/team-2.jpg">
+                                                </a>
+                                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
+                                                    <img alt="Image placeholder" src="/assets/img/theme/team-3.jpg">
+                                                </a>
+                                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
+                                                    <img alt="Image placeholder" src="/assets/img/theme/team-4.jpg">
+                                                </a>
+                                            </div>
+                                        </td> -->
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="completion mr-2"><%= propiedad.municipios_propiedad_approve %></span>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="completion mr-2"><%= propiedad.category_propiedad_approve %></span>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="completion mr-2"><%= propiedad.name_user %></span>
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+
+                                    <%  }); %>
+
+                                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-xl-12">
+    <div class="row">
+        <div class="col">
+            <div class="card col-12">
+                <!-- Card header -->
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Blogs</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" class="sort" data-sort="name">titulo</th>
+                                <th scope="col" class="sort" data-sort="budget">fecha</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Email de usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <% if(blogs.lenght != 0){ %>
+                                <% blogs.forEach(blog => { %>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm"><%= blog.title_blog %> </span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="budget">
+                                            <%= blog.title_blog %>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                      <!-- <i class="bg-danger"></i> -->
+                      <span class="status"><%= blog.name_user %></span>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                      <!-- <i class="bg-danger"></i> -->
+                      <span class="status"><%= blog.email_user %></span>
+                                            </span>
+                                        </td>
+
+
+
+                                    </tr>
+
+
+                                    <%  }); %>
+
+                                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-xl-12">
+    <div class="row">
+        <div class="col">
+            <div class="card col-12">
+                <!-- Card header -->
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Colaboradores</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" class="sort" data-sort="name">Nombre</th>
+                                <th scope="col" class="sort" data-sort="status">Provincia</th>
+                                <th scope="col">Municipios</th>
+                                <th scope="col" class="sort" data-sort="completion">Telefono</th>
+                                <th scope="col">Usuario</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <% if(teams.lenght != 0){ %>
+                                <% teams.forEach(team => { %>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm"><%= team.nombre_team %> </span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="budget">
+                                            <%= team.provincia_team %>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                      <!-- <i class="bg-danger"></i> -->
+                      <span class="status"><%= team.municipio_team %></span>
+                                            </span>
+                                        </td>
+                                        <!-- <td>
+                                            <div class="avatar-group">
+                                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                                                    <img alt="Image placeholder" src="/assets/img/theme/team-1.jpg">
+                                                </a>
+                                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Romina Hadid">
+                                                    <img alt="Image placeholder" src="/assets/img/theme/team-2.jpg">
+                                                </a>
+                                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Alexander Smith">
+                                                    <img alt="Image placeholder" src="/assets/img/theme/team-3.jpg">
+                                                </a>
+                                                <a href="#" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Doe">
+                                                    <img alt="Image placeholder" src="/assets/img/theme/team-4.jpg">
+                                                </a>
+                                            </div>
+                                        </td> -->
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="completion mr-2"><%= team.telefono_team %></span>
+
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="completion mr-2"><%= team.name_user %></span>
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+
+                                    <%  }); %>
+
+                                        <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

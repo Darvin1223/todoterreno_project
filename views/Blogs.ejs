@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head.ejs')%>
+
+    <body>
+
+        <%- include('partials/header.ejs')%>
+            <main class="contenedor secction contenido-centrado">
+                <h1 class="fw-300 centrar-texto">Nuestro blog</h1>
+                <% if(blogs.lenght !== 0){ %>
+                    <% blogs.forEach(blog => { %>
+                        <article class="entrada-blog">
+                            <div class="imagen">
+                                <img src="<%=blog.image_blog%>" alt="Imagen de blog de terraza">
+                            </div>
+                            <div class="texto-entrada">
+                                <a href="/blog">
+            <a href="/blog?id=<%=blog.id_blog %>">
+              <h4><%=blog.title_blog%></h4>
+            </a>
+                                <p>Escrito el: <span> <%=blog.fecha_blog%></span> </p>
+                                <%-blog.extract_blog%>
+                            </div>
+                        </article>
+                        <%}); %>
+
+                            <% } %>
+
+
+
+            </main>
+            <%- include('partials/footer.ejs')%>
+    </body>
+
+</html>

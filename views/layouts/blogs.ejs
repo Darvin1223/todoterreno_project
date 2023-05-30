@@ -1,0 +1,166 @@
+<div class="row">
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="mb-0">Blogs</h3>
+                    </div>
+                    <div class="col text-right">
+                        <a href="#" class="btn bg-success text-white" data-toggle="modal" data-target="#addBlogs">Agregar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" class="sort">Nombre</th>
+                            <th scope="col" class="sort">Fecha</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col" class="sort">Accion</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(blogs.length !== 0){ %> 
+                            <% blogs.forEach(blog => { %>
+                              <tr>
+                                <th scope="row">
+                                  <div class="media align-items-center">
+              
+                                    <div class="media-body">
+                                      <span class="name mb-0 text-sm"><%= blog.title_blog %> </span>
+                                    </div>
+                                  </div>
+                                </th>
+                                <td class="budget">
+                                  <p><%= blog.fecha_blog %></p>
+                                </td>
+                                <td class="budget">
+                                  <p><%= blog.name_user %></p>
+                                </td>
+                            
+                                <td class="text-right">
+                                  <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown"
+                                      aria-haspopup="true" aria-expanded="false">
+                                      <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                      <a class="dropdown-item" data-toggle="modal" data-target="#editarBlog" onclick="editar('<%= blog.id_blog %>','<%= blog.title_blog		 %>',' <%= blog.description_blog %>')" >Editar</a>
+                                    
+                                      <a class="dropdown-item" href="/delete-blog/<%= blog.id_blog %>">Eliminar</a>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                          <%  }); %> 
+                         
+                          <% } %> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+   
+</div>
+  <!-- Modal -->
+  <div class="modal" id="addBlogs" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <form id="form_blog" action="/create-blog" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="name">Nombre del blog</label>
+                <input type="text" class="form-control" name="nameBlog" id="nameBlog"
+                  aria-describedby="nameBloghelp">
+                <small id="nameBloghelp" class="form-text text-muted">por favor introduza el titulo del blog.</small>
+              </div>
+              <!-- <div class="form-group">
+                <label for="bathroon">Fecha:</label>
+                <input type="date" name="date" id="date" aria-describedby="dateHelp" class="form-control">
+
+                <small id="dateHelp" class="form-text text-muted">Por favor introduzca la fecha.</small>
+              </div> -->
+              <div class="form-group">
+                <label for="descripcion">Descripcion:</label>
+                <!-- <textarea aria-describedby="DescripcionHelp" class="form-control" name="descripcion" id="#"> -->
+                <input type="text" id="div_editor1" class="form-control" name="descripcion_blog">
+                <small id="DescripcionHelp" class="form-text text-muted">Por favor introduzca la descripcion de la
+                  propiedad.</small>
+              </div>
+
+              <div class="form-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="imageBlog" name="imageBlog" required>
+                  <label class="custom-file-label" for="image">Selecciona...</label>
+                  <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>
+                <small id="DescripcionHelp" class="form-text text-muted">Por favor seleccione las imagenes</small>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Edit -->
+  <div class="modal" id="editarBlog" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="container-fluid">
+            <form id="form_blog" action="/update-blog" method="POST" enctype="multipart/form-data">
+              <input type="hidden" name="id" id="id_edit">
+              <div class="form-group">
+                <label for="name">Nombre del blog</label>
+                <input type="text" class="form-control" name="nameBlog" id="nameBlog_edit"
+                  aria-describedby="nameBloghelp">
+                <small id="nameBloghelp" class="form-text text-muted">por favor introduza el titulo del blog.</small>
+              </div>
+              <!-- <div class="form-group">
+                <label for="bathroon">Fecha:</label>
+                <input type="date" name="date" id="date" aria-describedby="dateHelp" class="form-control">
+
+                <small id="dateHelp" class="form-text text-muted">Por favor introduzca la fecha.</small>
+              </div> -->
+              <div class="form-group">
+                <label for="descripcion">Descripcion:</label>
+                <!-- <textarea aria-describedby="DescripcionHelp" class="form-control" name="descripcion" id="#"> -->
+                <input type="text" id="div_editor2" class="form-control" name="descripcion_blog">
+                <small id="DescripcionHelp" class="form-text text-muted">Por favor introduzca la descripcion de la
+                  propiedad.</small>
+              </div>
+
+              <div class="form-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="imageBlog" name="imageBlog" >
+                  <label class="custom-file-label" for="image">Selecciona...</label>
+                  <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>
+                <small id="DescripcionHelp" class="form-text text-muted">Por favor seleccione las imagenes</small>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+  <!-- <script src="assets/js/provincias.js"></script> -->
+  <script src="assets/js/editor.js"></script>
+  <script src="assets/js/editar_blog.js"></script>

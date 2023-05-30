@@ -1,0 +1,244 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="mb-0">Nuestro equipo</h3>
+                    </div>
+                    <div class="col text-right">
+                        <a href="#" class="btn bg-success text-white" data-toggle="modal" data-target="#addUser">Agregar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <!-- Projects table -->
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col" class="sort">ID</th>
+                            <th scope="col" class="sort">Nombre</th>
+                            <th scope="col" class="sort">Telefono</th>
+                            <th scope="col" class="sort">Provincia</th>
+                            <th scope="col">Municipio</th>
+                            <th scope="col">creado por</th>
+                            <% if(user_rol == 'Administrador'){ %>
+                                <th scope="col">Cedula</th>
+                                <th scope="col">RNC</th>
+                                <% } %>
+
+                                    <th scope="col" class="sort">Accion</th>
+                                    <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(teams.lenght !== 0){ %>
+                            <% teams.forEach(team => { %>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm"><%= team.id_team  %> </span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th scope="row">
+                                        <div class="media align-items-center">
+                                            <div class="media-body">
+                                                <span class="name mb-0 text-sm"><%= team.nombre_team %> </span>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="budget">
+                                        <%= team.telefono_team %>
+                                    </td>
+                                    <td class="budget">
+                                        <%= team.provincia_team %>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-dot mr-4">
+                  <!-- <i class="bg-warning"></i> -->
+                  <span class="status"><%= team.municipio_team %> </span>
+                                        </span>
+                                    </td>
+
+                                    <td class="budget">
+                                        <%= team.name_user %>
+                                    </td>
+                                    <% if(user_rol == 'Administrador'){ %>
+                                        <td class="budget">
+                                            <% if(team.cedula_team ){ %>
+                                                <%= team.cedula_team %>
+                                                    <%  }else{ %>
+                                                        No requerido
+                                                        <% } %>
+                                        </td>
+                                        <td class="budget">
+                                            <% if(team.rnc_team){ %>
+                                                <%= team.rnc_team  %>
+                                                    <%  }else{ %>
+                                                        No requerido
+                                                        <% } %>
+                                        </td>
+                                        <% } %>
+
+                                            <td class="text-right">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <a class="dropdown-item" data-toggle="modal" data-target="#editar" onclick="editar('<%= 
+                                      team.id_team%>','<%= team.nombre_team %>','<%= team.telefono_team%>','<%= team.description_team%>','<%= team.image_team%>')">Editar</a>
+                                                        <a class="dropdown-item" href="/delete-colaborador/ <%= team.id_team  %> >">Eliminar</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                </tr>
+                                <% }); %>
+                                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal" id="addUser" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form action="/create-colaborador" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" class="form-control" name="name" id="name" aria-describedby="namehelp">
+                            <small id="namehelp" class="form-text text-muted">por favor introduza su nombre.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="telefono" class="form-control" name="telefono" id="telefono" aria-describedby="telefonoHelp">
+                            <small id="telefonoHelp" class="form-text text-muted">Por favor introduzca su telefono.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripcion:</label>
+                            <textarea aria-describedby="descripcionHelp" class="form-control" name="descripcion" id="descripcion"></textarea>
+
+                            <small id="descripcionHelp" class="form-text text-muted">Por favor introduzca su descripcion.</small>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipo" value="persona" id="Persona">
+                                <label class="form-check-label" for="Persona">
+                  Persona
+                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipo" value="empresa" id="Empresa">
+                                <label class="form-check-label" for="Empresa">
+                  Empresa
+                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Cedula">Cedula</label>
+                            <input type="text" class="form-control" name="Cedula" id="Cedula" aria-describedby="Cedula">
+                            <small id="Cedula" class="form-text text-muted">por favor introduza la cedula</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="RNC">RNC</label>
+                            <input type="text" class="form-control" name="RNC" id="RNC" aria-describedby="RNC">
+                            <small id="RNC" class="form-text text-muted">por favor introduza el RNC</small>
+                        </div>
+                        <div class="form-group" id="provinciaContainer">
+                            <label for="provincia">Provincias:</label>
+                            <select class="form-control" id="provinciaAgregarAprobada" name="provincias" data-target="municipioAgregarAprobada" required>
+              </select>
+                            <small class="form-text text-muted">Por favor seleccione la provincia.</small>
+                        </div>
+                        <div class="form-group" id="municipioContainer">
+                            <label for="municipio">Municipios:</label>
+                            <select class="form-control" id="municipioAgregarAprobada" name="municipios">
+              </select>
+                            <small class="form-text text-muted">Por favor seleccione la municipio.</small>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image" name="imagenColaboradores" required>
+                                <label class="custom-file-label" for="image">Choose file...</label>
+                                <div class="invalid-feedback">Example invalid custom file feedback</div>
+                            </div>
+                            <small id="DescripcionHelp" class="form-text text-muted">Por favor seleccione las imagenes</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Editar -->
+<div class="modal" id="editar" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form action="/update-colaborador" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="id_edit" id="id_edit">
+                        <div class="form-group">
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" class="form-control" name="name" id="name_edit" aria-describedby="namehelp">
+                            <small id="namehelp" class="form-text text-muted">por favor introduza su nombre.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            <input type="telefono" class="form-control" name="telefono" id="telefono_edit" aria-describedby="telefonoHelp">
+                            <small id="telefonoHelp" class="form-text text-muted">Por favor introduzca su telefono.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripcion:</label>
+                            <textarea aria-describedby="descripcionHelp" class="form-control" name="descripcion" id="descripcion_edit"></textarea>
+
+                            <small id="descripcionHelp" class="form-text text-muted">Por favor introduzca su descripcion.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image_edit" name="imagenColaboradores">
+                                <label class="custom-file-label" for="image">Choose file...</label>
+                                <div class="invalid-feedback">Example invalid custom file feedback</div>
+                            </div>
+                            <small id="DescripcionHelp" class="form-text text-muted">Por favor seleccione las imagenes</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="assets/js/provincias.js"></script>
+<script src="assets/js/person_or_business.js"></script>
+
+
+<!-- Editar -->
+
+<script>
+    function editar(id, name, telefono, descripcion, imagene) {
+
+        document.getElementById('id_edit').value = id;
+        document.getElementById('name_edit').value = name;
+        document.getElementById('telefono_edit').value = telefono;
+        document.getElementById('descripcion_edit').value = descripcion;
+        document.getElementById('image_edit').innerHTML = imagene;
+
+    }
+</script>

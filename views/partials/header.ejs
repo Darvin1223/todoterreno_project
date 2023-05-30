@@ -1,0 +1,49 @@
+<div id="google_element" class="google_elemente"></div>
+<header class="Site-header">
+	<div class="contenedor contenido-header">
+		<div class="barra">
+			<a href="/" class="logo">
+				<img src="img/logo.png" class="logo__img" alt="logo de Bienes Raices" />
+			</a>
+			<nav class="navegacion">
+				<!-- Propiedad target = "_blank" -->
+				<a href="/">inicio</a>
+				<a href="/nosotros">Nosotros</a>
+				<a href="/propiedades?page=1">Nuestras propiedades</a>
+				<a href="/blogs">Blogs</a>
+				<a href="/contacto">Contacto</a>
+				<a href="/login">Iniciar Sesion</a>
+			</nav>
+		</div>
+	</div>
+</header>
+<!-- Messenger Plugin de chat Code -->
+<div id="fb-root"></div>
+
+<!-- Your Plugin de chat code -->
+<div id="fb-customer-chat" class="fb-customerchat">
+</div>
+
+<script>
+  var chatbox = document.getElementById('fb-customer-chat');
+  chatbox.setAttribute("page_id", "110001897524940");
+  chatbox.setAttribute("attribution", "biz_inbox");
+</script>
+
+<!-- Your SDK code -->
+<script>
+  window.fbAsyncInit = function() {
+	FB.init({
+	  xfbml            : true,
+	  version          : 'v13.0'
+	});
+  };
+
+  (function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = 'https://connect.facebook.net/es_LA/sdk/xfbml.customerchat.js';
+	fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>

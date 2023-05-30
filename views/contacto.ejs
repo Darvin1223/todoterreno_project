@@ -1,0 +1,73 @@
+<html lang="es">
+
+
+<%- include('partials/head.ejs')%>
+
+<body>
+
+  <%- include('partials/header.ejs')%>
+
+  <h1 class="fw-300 centrar-texto">Contacto</h1>
+  <img src="img/destacada3.jpg" alt="Principal">
+  <main class="contenedor secction contenido-centrado">
+    <h2 class="fw-300 centrar-texto">Llenar el formulario de Contacto</h2>
+    <form action="/send-mail" name="contact" method="POST"  id="my-form">
+      <fieldset>
+        <legend>Tipo de solicitud</legend>
+        <div class="forma-contacto">
+          <label for="">compra</label>
+          <input type="radio" name="Eleccion" id="Alquiler" value="Compra " onclick="Opciones()">
+          <label for="">Venta</label>
+          <input type="radio" name="Eleccion" id="Comven" value="Venta" onclick="Opciones()">
+        </div>
+
+      </fieldset>
+      <fieldset>
+        <legend>Informacion Personal</legend>
+        <label for="Nombre">Nombre:</label>
+        <input type="text" id="Nombre" placeholder="Nombre" name="Nombre" required>
+        <label for="Email">E-mail:</label>
+        <input type="email" id="Email" name="Email" placeholder="Correo Electronico" required>
+        <label for="Telefono">Telefono:</label>
+        <input type="tel" id="Telefono" name="Telefono" placeholder="Telefono" required>
+        <label for="Mensaje">Mensaje:</label>
+        <textarea name="Mensaje" id="Mensaje" placeholder="Escribe tu mensaje."></textarea>
+
+
+      </fieldset>
+      <fieldset>
+        <legend>Informacion Sobre Propiedad</legend>
+        <label for="Opciones">Vende o Compra</label>
+        <select name="Opciones" id="Opciones">
+          <option value="" disabled selected>-- Seleccione --</option>
+          <option value="Compra">Compra</option>
+          <option value="Vende">Vende</option>
+        </select>
+
+        <label for="Presupuesto">Presupuesto</label>
+        <input type="text" name="Presupuesto" id="Presupuesto" >
+      </fieldset>
+      <fieldset>
+        <legend>Contacto</legend>
+
+        <p>Como desea ser contactado</p>
+        <div class="forma-contacto">
+          <label for="telefono">Telefono</label>
+          <input type="radio" id="telefono" name="Contacto" value="telefono">
+          <label for="correo">E-mail</label>
+          <input type="radio" id="correo" name="Contacto" value="correo">
+        </div>
+        <p>Si eligio Telefono, Elija la fecha y la hora.</p>
+
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha">
+        <label for="hora">Hora:</label>
+        <input type="time" name="hora" id="hora" min="09:00" max="18:00">
+
+      </fieldset>
+      <input type="submit" name="submit" id="submit" class="boton boton-verde">
+    </form>
+  </main>
+
+ <%- include('partials/footer.ejs')%>
+</body>

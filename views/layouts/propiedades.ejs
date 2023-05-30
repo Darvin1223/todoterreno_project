@@ -1,0 +1,1011 @@
+<% if(user_rol=='Administrador' ){ %>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Propiedades Aprobadas</h3>
+                        </div>
+                        <div class="col text-right">
+                            <a href="#" class="btn bg-success text-white" data-toggle="modal"
+                                data-target="#addPropiedadApprove">Agregar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <!-- Projects table -->
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" class="sort">Nombre</th>
+                                <th scope="col" class="sort">Precio</th>
+                                <th scope="col">Provincia</th>
+                                <th scope="col">Municipio</th>
+                                <th scope="col" class="sort">Tipo de vivienda</th>
+                                <th scope="col">Usuario</th>
+                                <!-- <th scope="col" class="sort">Accion</th> -->
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(ApprovePropiedades.length !==0){ %>
+                                <% ApprovePropiedades.forEach(ApprovePropiedad=> { %>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm">
+                                                        <%= ApprovePropiedad.name_propiedad_approve %>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="budget">
+                                            <%= ApprovePropiedad.price_propiedad_approve %>
+                                        </td>
+
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                                                <i class="bg-success"></i>
+                                                <span class="status">
+                                                    <%= ApprovePropiedad.province_propiedad_approve %>
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td class="budget">
+                                            <%= ApprovePropiedad.municipios_propiedad_approve %>
+                                        </td>
+                                        <td>
+                                            <%= ApprovePropiedad.category_propiedad_approve %>
+                                        </td>
+                                        <td>
+                                            <%= ApprovePropiedad.name_user %>
+                                        </td>
+
+                                        <td class="text-right">
+                                            <div class="dropdown">
+                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                    <!-- <a class="dropdown-item" data-toggle="modal" data-target="#editarPropiedadApprove" onclick="editar('<%= ApprovePropiedad.id_propiedad_approve %>','<%= ApprovePropiedad.name_propiedad_approve	 %>',' <%= ApprovePropiedad.price_propiedad_approve %>','<%=ApprovePropiedad.bathroom_propiedad_approve%>','<%=ApprovePropiedad.parking_propiedad_approve%>','<%=ApprovePropiedad.bedrooms_propiedad_approve%>','<%=ApprovePropiedad.description_propiedad_approve%>','<%=ApprovePropiedad.modena_approve%>','<%=ApprovePropiedad.category_propiedad_approve%>','<%=ApprovePropiedad.province_propiedad_approve%>','<%=ApprovePropiedad.municipios_propiedad_approve%>','<%=ApprovePropiedad.images_propiedad_approve%>','<%= ApprovePropiedad.destacado_propiedad_approve %>')">Editar</a> -->
+                                                    <a class="dropdown-item" data-toggle="modal"
+                                                        data-target="#editarPropiedadApprove"
+                                                        onclick="editData('<%=ApprovePropiedad.id_propiedad_approve %>')">
+                                                        editar</a>
+                                                    <a class="dropdown-item"
+                                                        href="/delete-propiedad/<%=  ApprovePropiedad.id_propiedad_approve %>">Eliminar</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+
+                                        <% }; %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header border-0">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="mb-0">Propiedades</h3>
+                        </div>
+                        <!-- <div class="col text-right">
+                        <a href="#" class="btn bg-success text-white" data-toggle="modal" data-target="#addPropiedad">Agregar</a>
+                    </div> -->
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <!-- Projects table -->
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col" class="sort">Nombre</th>
+                                <th scope="col" class="sort">Precio</th>
+                                <th scope="col">Provincia</th>
+                                <th scope="col">Municipio</th>
+                                <th scope="col" class="sort">Tipo de vivienda</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col" class="sort">Accion</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(propiedades.length !==0){ %>
+                                <% propiedades.forEach(propiedad=> { %>
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+
+                                                <div class="media-body">
+                                                    <span class="name mb-0 text-sm">
+                                                        <%= propiedad.name_propiedad %>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="budget">
+                                            <%= propiedad.price_propiedad %>
+                                        </td>
+
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                                                <i class="bg-success"></i>
+                                                <span class="status">
+                                                    <%= propiedad.province_propiedad %>
+                                                </span>
+                                            </span>
+                                        </td>
+                                        <td class="budget">
+                                            <%= propiedad.municipios_propiedad %>
+                                        </td>
+                                        <td>
+                                            <%= propiedad.category_propiedad %>
+                                        </td>
+                                        <td>
+                                            <%= propiedad.name_user %>
+                                        </td>
+
+                                        <td class="text-right">
+                                            <div class="dropdown">
+                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                    <a class="dropdown-item" data-toggle="modal"
+                                                        data-target="#aprobarPropiedad"
+                                                        onclick="aprobar('<%= propiedad.id_propiedad%>','<%= propiedad.name_propiedad	 %>',' <%= propiedad.price_propiedad %>','<%=propiedad.bathroom_propiedad%>','<%=propiedad.parking_propiedad%>','<%=propiedad.bedrooms_propiedad%>','<%=propiedad.description_propiedad%>','<%=propiedad.moneda_propiedad%>','<%=propiedad.category_propiedad%>','<%=propiedad.province_propiedad%>','<%=propiedad.municipios_propiedad%>','<%=propiedad.images_propiedad%>','<%= propiedad.destacado_propiedad %>')">Revisar</a>
+                                                    <a class="dropdown-item"
+                                                        href="/delete-propiedad/<%=  propiedad.id_propiedad %>">Eliminar</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+
+                                        <% }; %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% }else{ %>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header border-0">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h3 class="mb-0">Propiedades</h3>
+                            </div>
+                            <div class="col text-right">
+                                <button class="btn bg-success text-white" data-toggle="modal"
+                                    data-target="#addPropiedad">Agregar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <!-- Projects table -->
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" class="sort">Nombre</th>
+                                    <th scope="col" class="sort">Precio</th>
+                                    <th scope="col">Provincia</th>
+                                    <th scope="col">Municipio</th>
+                                    <th scope="col" class="sort">Tipo de vivienda</th>
+                                    <th scope="col">Usuario:</th>
+                                    <th scope="col" class="sort">Accion</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if(propiedades.length !==0){ %>
+                                    <% propiedades.forEach(propiedad=> { %>
+                                        <tr>
+                                            <th scope="row">
+                                                <div class="media align-items-center">
+
+                                                    <div class="media-body">
+                                                        <span class="name mb-0 text-sm">
+                                                            <%= propiedad.name_propiedad %>
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="budget">
+                                                <%= propiedad.price_propiedad %>
+                                            </td>
+
+                                            <td>
+                                                <span class="badge badge-dot mr-4">
+                                                    <i class="bg-success"></i>
+                                                    <span class="status">
+                                                        <%= propiedad.province_propiedad %>
+                                                    </span>
+                                                </span>
+                                            </td>
+                                            <td class="budget">
+                                                <%= propiedad.municipios_propiedad %>
+                                            </td>
+                                            <td>
+                                                <%= propiedad.category_propiedad %>
+                                            </td>
+                                            <td>
+                                                <%= propiedad.name_user %>
+                                            </td>
+
+                                            <td class="text-right">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-sm btn-icon-only text-light" href="#"
+                                                        role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="fas fa-ellipsis-v"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                                        <a class="dropdown-item" data-toggle="modal"
+                                                            data-target="#editarPropiedad"
+                                                            onclick="editar('<%= propiedad.id_propiedad%>','<%= propiedad.name_propiedad	 %>',' <%= propiedad.price_propiedad %>','<%=propiedad.bathroom_propiedad%>','<%=propiedad.parking_propiedad%>','<%=propiedad.bedrooms_propiedad%>','<%=propiedad.description_propiedad%>','<%=propiedad.moneda_propiedad%>','<%=propiedad.category_propiedad%>','<%=propiedad.province_propiedad%>','<%=propiedad.municipios_propiedad%>','<%=propiedad.images_propiedad%>','<%= propiedad.destacado_propiedad %>')">Editar</a>
+                                                        <a class="dropdown-item"
+                                                            href="/delete-propiedad/<%=  propiedad.ads_id %>">Eliminar</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% }); %>
+
+                                            <% }; %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+            <% if(user_rol=='Administrador' ){ %>
+                <div class="modal" id="addPropiedadApprove" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form id="form_propiedades" method="POST" action="/create-propiedad-approve"
+                                        enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="name">Nombre De la propiedad</label>
+                                            <input type="text" class="form-control" name="name" id="name"
+                                                aria-describedby="namehelp">
+                                            <small id="namehelp" class="form-text text-muted">por favor introduza el
+                                                nombre de la propiedad.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="precio">Precio</label>
+                                            <input type="text" class="form-control" name="price" id="price"
+                                                aria-describedby="numberHelp">
+                                            <small id="numberHelp" class="form-text text-muted">Por favor introduzca el
+                                                precio.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bathroon">cantidad de baños:</label>
+                                            <input type="number" aria-describedby="bathroonHelp" class="form-control"
+                                                name="bathroon" id="bathroon">
+                                            <small id="bathroonHelp" class="form-text text-muted">Por favor introduzca
+                                                la cantidad de ba単os.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="parking">cantidad de parqueos:</label>
+                                            <input type="number" aria-describedby="parkingHelp" class="form-control"
+                                                name="parking" id="parking">
+                                            <small id="parkingHelp" class="form-text text-muted">Por favor introduzca la
+                                                cantidad de parqueos.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bedroom">cantidad de habitaciones:</label>
+                                            <input type="number" aria-describedby="bedroomHelp" class="form-control"
+                                                name="bedroom" id="bedroom">
+                                            <small id="bedroomHelp" class="form-text text-muted">Por favor introduzca la
+                                                cantidad de habitaciones.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Tipo">Selecione la categoria</label>
+                                            <select name="categoria" id="categoria" class="form-control">
+                                                <option value="#" disabled selected>Seleccione:</option>
+                                                <option value="casa">Casa</option>
+                                                <option value="apartamento">apartamento</option>
+                                                <option value="pent-house">pent-house</option>
+                                                <option value="solar">solar</option>
+                                                <option value="finca">finca</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Tipo">Active si es una propiedad destacada</label>
+                                            <input type="checkbox" name="destacado" id="destacado" value="1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="moneda">Selecione la Moneda</label>
+                                            <select name="moneda" id="moneda" class="form-control">
+                                                <option value="#" disabled selected>Seleccione:</option>
+                                                <option value="RD$">RD$</option>
+                                                <option value="US$">US$</option>
+                                                <option value="€">€</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="provinciaContainer">
+                                            <label for="provincia">Provincias:</label>
+                                            <select class="form-control" id="provinciaAgregarAprobada" name="provincias"
+                                                data-target="municipioAgregarAprobada" required>
+                                            </select>
+                                            <small class="form-text text-muted">Por favor seleccione la
+                                                provincia.</small>
+                                        </div>
+                                        <div class="form-group" id="municipioContainer">
+                                            <label for="municipio">Municipios:</label>
+                                            <select class="form-control" id="municipioAgregarAprobada"
+                                                name="municipios">
+                                            </select>
+                                            <small class="form-text text-muted">Por favor seleccione la
+                                                municipio.</small>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="description_html">Descripcion:</label>
+                                            <!-- <textarea aria-describedby="DescripcionHelp" class="form-control" name="descripcion" id="#"> -->
+                                            <!-- <div  id="editor"></div> -->
+                                            <textarea id="editor" class="form-control" name="description_html"
+                                                style="height: 100px;"></textarea>
+
+                                            <small id="DescripcionHelp" class="form-text text-muted">Por favor
+                                                introduzca la descripcion de la propiedad.</small>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <div class="custom-file">
+                                                <input type="file" multiple="true" id="image" name="image_propiedades">
+                                                <!-- <label class="custom-file-label" for="image">Choose file...</label> -->
+                                                <!-- <div class="invalid-feedback">Example invalid custom file feedback</div> -->
+                                            </div>
+                                            <small id="DescripcionHelp" class="form-text text-muted">Por favor
+                                                seleccione las imagenes</small>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <% }else{ %>
+                    <% } %>
+
+                        <!-- Propiedad en aprovacion -->
+                        <div class="modal" id="aprobarPropiedad" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <form id="form_propiedades" method="POST" action="/aprobar-propiedad"
+                                                enctype="multipart/form-data">
+                                                <!-- <input type="hidden" name="id_aprove" id="id_aprove"> -->
+                                                <div class="form-group">
+                                                    <label for="name">Nombre De la propiedad</label>
+                                                    <input type="text" class="form-control" name="name"
+                                                        id="name_approve" aria-describedby="namehelp">
+                                                    <small id="namehelp" class="form-text text-muted">por favor
+                                                        introduza el nombre de la propiedad.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="precio">Precio</label>
+                                                    <input type="text" class="form-control" name="price"
+                                                        id="price_approve" aria-describedby="numberHelp">
+                                                    <small id="numberHelp" class="form-text text-muted">Por favor
+                                                        introduzca el precio.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="bathroon">cantidad de baños:</label>
+                                                    <input type="number" aria-describedby="bathroonHelp"
+                                                        class="form-control" name="bathroon" id="bathroon_approve">
+                                                    <small id="bathroonHelp" class="form-text text-muted">Por favor
+                                                        introduzca la cantidad de ba単os.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="parking">cantidad de parqueos:</label>
+                                                    <input type="number" aria-describedby="parkingHelp"
+                                                        class="form-control" name="parking" id="parking_approve">
+                                                    <small id="parkingHelp" class="form-text text-muted">Por favor
+                                                        introduzca la cantidad de parqueos.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="bedroom">cantidad de habitaciones:</label>
+                                                    <input type="number" aria-describedby="bedroomHelp"
+                                                        class="form-control" name="bedroom" id="bedroom_approve">
+                                                    <small id="bedroomHelp" class="form-text text-muted">Por favor
+                                                        introduzca la cantidad de habitaciones.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Tipo">Selecione la categoria</label>
+                                                    <select name="categoria" id="categoria_approve"
+                                                        class="form-control">
+                                                        <option value="#" disabled selected>Seleccione:</option>
+                                                        <option value="casa">Casa</option>
+                                                        <option value="apartamento">apartamento</option>
+                                                        <option value="pent-house">pent-house</option>
+                                                        <option value="solar">solar</option>
+                                                        <option value="finca">finca</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Tipo">Active si es una propiedad destacada</label>
+                                                    <input type="checkbox" name="destacado" id="destacado_approve">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="moneda">Selecione la Moneda</label>
+                                                    <select name="moneda" id="moneda_approve" class="form-control">
+                                                        <option value="#" disabled>Seleccione:</option>
+                                                        <option value="RD$">RD$</option>
+                                                        <option value="US$">US$</option>
+                                                        <option value="€">€</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group" id="provinciaContainer">
+                                                    <label for="provinciaAprobar">Provincias:</label>
+                                                    <select class="form-control" id="provinciaAprobar" name="provincias"
+                                                        data-target="municipioAprobar" required>
+
+                                                    </select>
+                                                    <small class="form-text text-muted">Por favor seleccione la
+                                                        provincia.</small>
+                                                </div>
+                                                <div class="form-group" id="municipioContainer">
+                                                    <label for="municipio">Municipios:</label>
+                                                    <select class="form-control" id="municipioAprobar"
+                                                        name="municipios">
+                                                    </select>
+                                                    <small class="form-text text-muted">Por favor seleccione la
+                                                        municipio.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="description_html">Descripcion:</label>
+                                                    <!-- <textarea aria-describedby="DescripcionHelp" class="form-control" name="descripcion" id="#"> -->
+                                                    <input type="text" id="editor1" class="form-control"
+                                                        name="description_html" value="">
+                                                    <small id="DescripcionHelp" class="form-text text-muted">Por favor
+                                                        introduzca la descripcion de la propiedad.</small>
+                                                </div>
+                                                <!-- <div class="form-group">
+                <div class="custom-file">
+                  <input type="file" multiple="true" class="custom-file-input" id="image_approve" name="image_propiedades" required>
+                  <label class="custom-file-label" for="image">Choose file...</label>
+                  <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>
+                <small id="DescripcionHelp" class="form-text text-muted">Por favor seleccione las imagenes</small>
+              </div> -->
+                                                <div class="form-group">
+                                                    <label for="">Imagenes</label>
+                                                    <div id="images">
+                                                    </div>
+                                                    <input type="hidden" name="id_aprove" id="id_aprove">
+                                                    <input type="hidden" id="images_aproves">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" multiple="true" id="image"
+                                                            name="image_propiedades">
+                                                        <label for="image">Choose file...</label>
+                                                        <!-- <div class="invalid-feedback">Example invalid custom file feedback</div> -->
+                                                    </div>
+                                                    <small id="DescripcionHelp" class="form-text text-muted">Por favor
+                                                        seleccione las nueva imagenes</small>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Editar -->
+                        <div class="modal" id="editarPropiedad" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <form id="form_propiedades" method="POST" action="/update-propiedad"
+                                                enctype="multipart/form-data">
+
+                                                <div class="form-group">
+                                                    <label for="name">Nombre De la propiedad</label>
+                                                    <input type="text" class="form-control" name="name" id="name_edit"
+                                                        aria-describedby="namehelp">
+                                                    <small id="namehelp" class="form-text text-muted">por favor
+                                                        introduza el nombre de la propiedad.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="precio">Precio</label>
+                                                    <input type="text" class="form-control" name="price" id="price_edit"
+                                                        aria-describedby="numberHelp">
+                                                    <small id="numberHelp" class="form-text text-muted">Por favor
+                                                        introduzca el precio.</small>
+                                                </div>
+
+
+
+                                                <div class="form-group">
+                                                    <label for="bathroon">cantidad de baños:</label>
+                                                    <input type="number" aria-describedby="bathroonHelp"
+                                                        class="form-control" name="bathroon" id="bathroon_edit">
+                                                    <small id="bathroonHelp" class="form-text text-muted">Por favor
+                                                        introduzca la cantidad de ba単os.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="parking">cantidad de parqueos:</label>
+                                                    <input type="number" aria-describedby="parkingHelp"
+                                                        class="form-control" name="parking" id="parking_edit">
+                                                    <small id="parkingHelp" class="form-text text-muted">Por favor
+                                                        introduzca la cantidad de parqueos.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="bedroom">cantidad de habitaciones:</label>
+                                                    <input type="number" aria-describedby="bedroomHelp"
+                                                        class="form-control" name="bedroom" id="bedroom_edit">
+                                                    <small id="bedroomHelp" class="form-text text-muted">Por favor
+                                                        introduzca la cantidad de habitaciones.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Tipo">Selecione la categoria</label>
+                                                    <select name="categoria" id="categoria_edit" class="form-control">
+                                                        <option value="#" disabled selected>Seleccione:</option>
+                                                        <option value="casa">Casa</option>
+                                                        <option value="apartamento">apartamento</option>
+                                                        <option value="pent-house">pent-house</option>
+                                                        <option value="solar">solar</option>
+                                                        <option value="finca">finca</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Tipo">Active si es una propiedad destacada</label>
+                                                    <input type="checkbox" name="destacado" id="destacado_edit"
+                                                        value="1">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="moneda">Selecione la Moneda</label>
+                                                    <select name="moneda" id="moneda_edit" class="form-control">
+                                                        <option value="#" disabled selected>Seleccione:</option>
+                                                        <option value="RD$">RD$</option>
+                                                        <option value="US$">US$</option>
+                                                        <option value="€">€</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group" id="provinciaContainer">
+                                                    <label for="provincia">Provincias:</label>
+                                                    <select class="form-control" id="provinciaEditar" name="provincias"
+                                                        data-target="municipioEditar" required>
+                                                    </select>
+                                                    <small class="form-text text-muted">Por favor seleccione la
+                                                        provincia.</small>
+                                                </div>
+
+                                                <div class="form-group" id="municipioContainer">
+                                                    <label for="municipio">Municipios:</label>
+                                                    <select class="form-control" id="municipioEditar" name="municipios">
+                                                    </select>
+                                                    <small class="form-text text-muted">Por favor seleccione la
+                                                        municipio.</small>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="description_html">Descripcion:</label>
+                                                    <!-- <textarea aria-describedby="DescripcionHelp" class="form-control" name="descripcion" id="#"> -->
+                                                    <input type="text" id="editor2" class="form-control"
+                                                        name="description_html">
+                                                    <small id="DescripcionHelp" class="form-text text-muted">Por favor
+                                                        introduzca la descripcion de la propiedad.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Imagenes</label>
+                                                    <div id="images">
+                                                    </div>
+                                                    <input type="hidden" name="id_edit" id="id_edit">
+                                                    <input type="hidden" id="images_edits">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" multiple="true" id="image"
+                                                            name="image_propiedades">
+                                                        <label for="image">Choose file...</label>
+                                                        <!-- <div class="invalid-feedback">Example invalid custom file feedback</div> -->
+                                                    </div>
+                                                    <!-- <small id="DescripcionHelp" class="form-text text-muted">Por favor seleccione las imagenes</small> -->
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Editar Approve -->
+                        <div class="modal" id="editarPropiedadApprove" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <form id="form_propiedades_edit_approve" method="POST"
+                                                action="/update-propiedad-approve" enctype="multipart/form-data">
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <% if(user_rol=='Moderador' ) {%>
+
+                            <div class="modal" id="addPropiedad" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <form id="form_propiedades" method="POST" action="/create-propiedad"
+                                                    enctype="multipart/form-data">
+
+                                                    <div class="form-group">
+                                                        <label for="name">Nombre De la propiedad</label>
+                                                        <input type="text" class="form-control" name="name" id="name"
+                                                            aria-describedby="namehelp">
+                                                        <small id="namehelp" class="form-text text-muted">por favor
+                                                            introduza el nombre de la propiedad.</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="precio">Precio</label>
+                                                        <input type="text" class="form-control" name="price" id="price"
+                                                            aria-describedby="numberHelp">
+                                                        <small id="numberHelp" class="form-text text-muted">Por favor
+                                                            introduzca el precio.</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="bathroon">cantidad de baños:</label>
+                                                        <input type="number" aria-describedby="bathroonHelp"
+                                                            class="form-control" name="bathroon" id="bathroon">
+                                                        <small id="bathroonHelp" class="form-text text-muted">Por favor
+                                                            introduzca la cantidad de ba単os.</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="parking">cantidad de parqueos:</label>
+                                                        <input type="number" aria-describedby="parkingHelp"
+                                                            class="form-control" name="parking" id="parking">
+                                                        <small id="parkingHelp" class="form-text text-muted">Por favor
+                                                            introduzca la cantidad de parqueos.</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="bedroom">cantidad de habitaciones:</label>
+                                                        <input type="number" aria-describedby="bedroomHelp"
+                                                            class="form-control" name="bedroom" id="bedroom">
+                                                        <small id="bedroomHelp" class="form-text text-muted">Por favor
+                                                            introduzca la cantidad de habitaciones.</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Tipo">Selecione la categoria</label>
+                                                        <select name="categoria" id="categoria" class="form-control">
+                                                            <option value="#" disabled selected>Seleccione:</option>
+                                                            <option value="casa">Casa</option>
+                                                            <option value="apartamento">apartamento</option>
+                                                            <option value="pent-house">pent-house</option>
+                                                            <option value="solar">solar</option>
+                                                            <option value="finca">finca</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Tipo">Active si es una propiedad destacada</label>
+                                                        <input type="checkbox" name="destacado" id="destacado"
+                                                            value="1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="moneda">Selecione la Moneda</label>
+                                                        <select name="moneda" id="moneda" class="form-control">
+                                                            <option value="#" disabled selected>Seleccione:</option>
+                                                            <option value="RD$">RD$</option>
+                                                            <option value="US$">US$</option>
+                                                            <option value="€">€</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group" id="provinciaContainer">
+                                                        <label for="provincia">Provincias:</label>
+                                                        <select class="form-control" id="provinciaAgregar"
+                                                            name="provincias" data-target="municipioAgregar" required>
+                                                        </select>
+                                                        <small class="form-text text-muted">Por favor seleccione la
+                                                            provincia.</small>
+                                                    </div>
+                                                    <div class="form-group" id="municipioContainer">
+                                                        <label for="municipio">Municipios:</label>
+                                                        <select class="form-control" id="municipioAgregar"
+                                                            name="municipios">
+                                                        </select>
+                                                        <small class="form-text text-muted">Por favor seleccione la
+                                                            municipio.</small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="description_html">Descripcion:</label>
+                                                        <!-- <textarea aria-describedby="DescripcionHelp" class="form-control" name="descripcion" id="#"> -->
+                                                        <input type="text" id="editor4" class="form-control"
+                                                            name="description_html">
+                                                        <small id="DescripcionHelp" class="form-text text-muted">Por
+                                                            favor introduzca la descripcion de la propiedad.</small>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" multiple="true" id="image"
+                                                                name="image_propiedades">
+                                                            <label for="image">Choose file...</label>
+                                                            <div class="invalid-feedback">Example invalid custom file
+                                                                feedback</div>
+                                                        </div>
+                                                        <small id="DescripcionHelp" class="form-text text-muted">Por
+                                                            favor seleccione las imagenes</small>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <% } %>
+
+
+
+
+
+                                <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+                                <script>
+                                    var quill = new Quill('#editor', {
+                                        theme: 'snow'
+                                    });
+                                    var quill1 = new Quill('#editor1', {
+                                        theme: 'snow'
+                                    });
+                                    var quill2 = new Quill('#editor2', {
+                                        theme: 'snow'
+                                    });
+                            // var quill3 = new Quill('#editor3', {
+                            //   theme: 'snow'
+                            // });
+                            // var quill4 = new Quill('#editor4', {
+                            //   theme: 'snow'
+                            // });
+                                </script>
+
+                                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                                <script src="/assets/js/provincias.js"></script>
+                                <!-- <script src="/assets/js/editor.js"></script> -->
+                                <script src="/assets/js/aprobar_propiedad.js"></script>
+                                <script src="/assets/js/editar_propiedades.js"></script>
+                                <script src="/assets/js/editar_propiedades_aprobadas.js"></script>
+                                <script src="/js/edit_propiedades_approve.js"></script>
+                                <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+                                    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+                                    crossorigin="anonymous"></script>
+                                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+                                    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+                                    crossorigin="anonymous"></script>
+
+                                <script>
+
+
+
+                                    let form_edit_approve = document.getElementById("form_propiedades_edit_approve");
+                                    // let url_api = "";
+                                    const editData = async (id_data) => {
+                                        let nombreProvincia = "";
+                                        let nombreMunicipio = "";
+                                        let allProvincias = [];
+                                        let allMunicipios = [];
+                                        let codigo = 0;
+                                        //Getting information about the real state
+                                        const response = await fetch(`/apiv1/getpropiedad?id_data=${id_data}`);
+                                        const propiedadData = await response.json();
+                                        const data = Object.values(propiedadData);
+
+                                        //Getting data about the province
+                                        const provincias = await fetch('/getprovincias');
+                                        const provinciasData = await provincias.json();
+                                        const dataProvincia = Object.values(provinciasData);
+                                        
+                                        // province_propiedad_approve
+                                        for (let i = 0; i < dataProvincia.length; i++) {
+                                            const element = dataProvincia[i].nombre; 
+                                            if(element == data[0].province_propiedad_approve){
+                                                codigo = dataProvincia[i].codigo;
+                                                nombreProvincia = element;
+                                                break;
+                                            }
+                                        }
+                                        for (let i = 0; i < dataProvincia.length; i++) {
+                                            const element = dataProvincia[i].nombre; 
+                                            allProvincias.push(element);
+                                            if(element == data[0].province_propiedad_approve){
+                                                console.log("found it");
+                                                continue;
+                                            }
+                                        }
+                                        //Getting data about municipies
+                                        const municipies = await fetch(`/getmunicipios/${codigo}`);
+                                        const municipiesData = await municipies.json();
+                                        const dataMunicipio = Object.values(municipiesData);
+                                        for(let i = 0; i < dataMunicipio.length; i++){
+                                            const element = dataMunicipio[i].nombre;
+                                            if(element == data[0].municipios_propiedad_approve){
+                                                nombreMunicipio = element;
+                                                break;
+                                            }
+                                        }
+                                      
+                                        for(let i = 0; i < dataMunicipio.length; i++){
+                                            const element = dataMunicipio[i].nombre;
+                                            allMunicipios.push(element);
+                                            if(element == data[0].municipios_propiedad_approve){
+                                               continue;
+                                            }
+                                        }
+                                      
+                                      
+                                        // console.log(codigo);
+                                        console.table(data[0]);
+                                        console.log(data[0].images_propiedad_approve)
+                                        // console.table(dataProvincia);
+                                        
+                                        let elementHtml = `
+                                                <div class="form-group">
+                                                    <label for="name">Nombre De la propiedad</label>
+                                                    <input type="text" class="form-control" name="name" id="name_edit_aprove" value=${data[0].name_propiedad_approve} aria-describedby="namehelp">
+                                                    <small id="namehelp" class="form-text text-muted">por favor introduza el nombre de la propiedad.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="precio">Precio</label>
+                                                    <input type="text" class="form-control" name="price" value=${data[0].price_propiedad_approve} id="price_edit_aprove" aria-describedby="numberHelp">
+                                                    <small id="numberHelp" class="form-text text-muted">Por favor introduzca el precio.</small>
+                                                </div>
+
+                                                <div class="form-group" id="provinciaContainer">
+                                                    <label for="provincia">Provincias:</label>
+                                                   <!-- <select class="form-control" id="provinciaEditar_edit" value=${data[0].province_propiedad_approve} name="provincias" onchange="obtener_municipios(document.getElementById('provinciaEditar_edit').value,document.getElementById('municipioEditar_edit'))" data-target="municipioEditar" required>
+                                                    </select> -->
+                                                    <select class="form-control" id="provinciaEditar_edit"  name="provincias" data-target="municipioEditar" required>
+                                                        <option disabled selected value=${data[0].province_propiedad_approve}> ${data[0].province_propiedad_approve} </option>
+                                                        ${allProvincias.map(element => `<option  value=${element}> ${element} </option>`)}
+                                                    </select>
+                                                    <small class="form-text text-muted">Por favor seleccione la provincia.</small>
+                                                </div>
+
+                                                <div class="form-group" id="municipioContainer">
+                                                    <label for="municipio">Municipios:</label>
+                                                    <select class="form-control" id="municipioEditar_edit" name="municipios">
+                                                        <option  disabled selected >${data[0].municipios_propiedad_approve}</option>
+                                                      ${  allMunicipios.map(element => `<option value=${element} >${element}</option>`)}
+                                                    </select>
+                                                    <small class="form-text text-muted">Por favor seleccione la municipio.</small>
+                                                </div>
+
+
+
+                                                <div class="form-group">
+                                                    <label for="bathroon">cantidad de baños:</label>
+                                                    <input type="number" aria-describedby="bathroonHelp" value=${data[0].bathroom_propiedad_approve} class="form-control" name="bathroon" id="bathroon_edit_aprove">
+                                                    <small id="bathroonHelp" class="form-text text-muted">Por favor introduzca la cantidad de ba単os.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="parking">cantidad de parqueos:</label>
+                                                    <input type="number" aria-describedby="parkingHelp" class="form-control" value=${data[0].parking_propiedad_approve} name="parking" id="parking_edit_aprove">
+                                                    <small id="parkingHelp" class="form-text text-muted">Por favor introduzca la cantidad de parqueos.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="bedroom">cantidad de habitaciones:</label>
+                                                    <input type="number" aria-describedby="bedroomHelp" class="form-control" value=${data[0].bedrooms_propiedad_approve} name="bedroom" id="bedroom_edit_aprove">
+                                                    <small id="bedroomHelp" class="form-text text-muted">Por favor introduzca la cantidad de habitaciones.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Tipo">Selecione la categoria</label>
+                                                    <select name="categoria" id="categoria_edit_aprove" class="form-control">
+                <option value="#" disabled selected>Seleccione:</option>
+                <option value="casa">Casa</option>
+                <option value="apartamento">apartamento</option>
+                <option value="pent-house">pent-house</option>
+                <option value="solar">solar</option>
+                <option value="finca">finca</option>
+              </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Tipo">Active si es una propiedad destacada</label>
+                                                    <input type="checkbox" name="destacado" id="destacado_edit_aprove" value="1">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="moneda">Selecione la Moneda</label>
+                                                    <select name="moneda" id="moneda_edit_aprove" class="form-control">
+                <option value="#" disabled selected>Seleccione:</option>
+                <option value="RD$">RD$</option>
+                <option value="US$">US$</option>
+                <option value="€">€</option>
+              </select>
+                                                </div>
+                                                <!-- <div class="form-group" id="provinciaContainer">
+                                                    <label for="provincia">Provincias:</label>
+                                                    <select class="form-control" id="provinciaAgregarAprobada" name="provincias" data-target="municipioEditarAprobada" required>
+              </select>
+                                                    <small class="form-text text-muted">Por favor seleccione la provincia.</small>
+                                                </div>
+                                                <div class="form-group" id="municipioContainer">
+                                                    <label for="municipio">Municipios:</label>
+                                                    <select class="form-control" id="municipioEditarAprobada" name="municipios">
+              </select>
+                                                    <small class="form-text text-muted">Por favor seleccione la municipio.</small>
+                                                </div> -->
+                                                <div class="form-group">
+                                                    <label for="description_html">Descripcion:</label>
+                                                    <textarea id="editor3" class="form-control"   name="description_html" style="height: 100px;"></textarea>
+                                                 
+                                                    <small id="DescripcionHelp" class="form-text text-muted">Por favor introduzca la descripcion de la propiedad.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Imagenes</label>
+                                                    <div id="images">
+                                                    </div>
+                                                    <input type="hidden" name="id_edit" id="id_edit_aprove">
+                                                    <input type="hidden" id="images_edits">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" multiple="true"  id="image" name="image_propiedades">
+                                                        <label  for="image">Choose file...</label>
+                                                        <!-- <div class="invalid-feedback">Example invalid custom file feedback</div> -->
+                                                    </div>
+                                                    <!-- <small id="DescripcionHelp" class="form-text text-muted">Por favor seleccione las imagenes</small> -->
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary">Guardar</button>`;
+                                        form_edit_approve.innerHTML = elementHtml;
+                                        tinymce.init({
+  selector: '#editor3',
+  plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+  setup: function (editor) {
+    editor.on('init', function () {
+      // Establecer el contenido en el editor
+      editor.setContent(data[0].description_propiedad_approve);
+    });
+  }
+});
+ 
+                                    }
+                                </script>
