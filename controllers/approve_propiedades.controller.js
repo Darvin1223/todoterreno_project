@@ -115,14 +115,14 @@ class Approve_propiedades {
                 bedroom,
                 categoria,
                 moneda,
-                provincias,
                 municipios,
                 description_html,
             } = req.body;
-
-
+            const provincias = req.body;
+           
             let destacado = req.body.destacado;
-
+    
+            console.log(categoria)
             if (destacado === undefined) {
                 destacado = 0;
             }
@@ -151,17 +151,17 @@ class Approve_propiedades {
 
             let provincia_local = "";
 
-            if (cuenta_imagen == 0) {
+            if (imagenes.length == 0) {
+            
 
-
-                conexion.query(
-                    "select * from provincias where provincia_id  = ?", [provincias],
-                    (error, provincia_name) => {
-                        if (error) {
-                            throw error
-                        } else {
-                            provincia_local = provincia_name[0].nombre
-                        }
+                // conexion.query(
+                //     "select * from provincias where provincia_id  = ?", [provincias],
+                //     (error, provincia_name) => {
+                //         if (error) {
+                //             throw error
+                //         } else {
+                //             provincia_local = provincia_name[0].nombre
+                //         }
 
                 
                 conexion.query(
@@ -187,29 +187,20 @@ class Approve_propiedades {
                     (error, exec) => {
                         if (error) {
                             console.log(error);
-                            res.redirect("/propiedades_admin", {
-                                error: error,
-                            });
+                            res.redirect("/propiedades_admin");
                         } else {
                             res.redirect("/propiedades_admin");
                         }
                     }
                 );
 
-            })
+            // })
 
             } else {
 
                 let provincia_local = "";
 
-                conexion.query(
-                    "select * from provincias where provincia_id  = ?", [provincias],
-                    (error, provincia_name) => {
-                        if (error) {
-                            throw error
-                        } else {
-                            provincia_local = provincia_name[0].nombre
-                        }
+             
 
 
                 conexion.query(
@@ -238,16 +229,14 @@ class Approve_propiedades {
                     (error, exec) => {
                         if (error) {
                             console.log(error);
-                            res.redirect("/propiedades_admin", {
-                                error: error,
-                            });
+                            res.redirect("/propiedades_admin");
                         } else {
                             res.redirect("/propiedades_admin");
                         }
                     }
                 );
 
-            })
+            
 
 
             }

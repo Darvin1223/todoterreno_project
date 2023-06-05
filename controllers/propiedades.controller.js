@@ -253,7 +253,17 @@ class Propiedades {
     }
 
     // Client
-
+    GetOnePropiedad(req,res){
+        const {id} = req.body;
+        conexion.query("select * from propiedades where id_propiedad = ?",[id], (err,result)=>{
+            if(err){
+                console.log(err);
+                res.json(err);
+            }else{
+                res.json({propiedades:result[0]});
+            }
+        })
+    }
 
 }
 
