@@ -14,12 +14,11 @@ const mysql2 = require('mysql2');
 // }
 
 const conexion = mysql2.createPool({
-    connectionLimit: 4,
     host: 'localhost',
     user: 'root',
-    password:'root',
-    database: 'grupotodoterreno',
-    port: 8081
+    password:'',
+    database: 'todoterreno',
+    port: 3306
 });
 // const conexion = mysql2.createPool({
 //     connectionLimit: 4,

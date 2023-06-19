@@ -397,6 +397,34 @@ class Approve_propiedades {
         })
     }
 
+    EditarProvincias_Municipios(req,res){
+
+        let {id} = req.params;
+
+        conexion.query(`SELECT id_propiedad_approve,province_propiedad_approve,municipios_propiedad_approve FROM propiedades_approve WHERE id_propiedad_approve = ?`,[id],(error,resultado)=>{
+
+            console.log(resultado);
+
+            let {id_propiedad_approve, province_propiedad_approve, municipios_propiedad_approve} = resultado[0];
+
+            conexion.query('select municipio_id, municipios.nombre as nombre_municipio, provincias.nombre as nombre_provincia from municipios inner join provincias on municipios.provincia_id = provincias.provincia_id WHERE provincias.nombre = ?',[province_propiedad_approve], (error, municipios_provincias) =>{
+                res.json(municipios_provincias)
+            })
+
+        })
+    }
+
+    ObtenerMunicipiosPorProvincias(req,res){
+        
+        let provincia = req.params.provincia;
+
+        conexion.query('select municipio_id, municipios.nombre as nombre_municipio, provincias.nombre as nombre_provincia from municipios inner join provincias on municipios.provincia_id = provincias.provincia_id WHERE provincias.nombre = ?',[provincia], (error, municipios_provincias) =>{
+            res.json(municipios_provincias)
+        })
+    }
+
+
+
 }
 
 module.exports = new Approve_propiedades()

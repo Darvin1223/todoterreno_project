@@ -75,7 +75,8 @@
                                                     <!-- <a class="dropdown-item" data-toggle="modal" data-target="#editarPropiedadApprove" onclick="editar('<%= ApprovePropiedad.id_propiedad_approve %>','<%= ApprovePropiedad.name_propiedad_approve	 %>',' <%= ApprovePropiedad.price_propiedad_approve %>','<%=ApprovePropiedad.bathroom_propiedad_approve%>','<%=ApprovePropiedad.parking_propiedad_approve%>','<%=ApprovePropiedad.bedrooms_propiedad_approve%>','<%=ApprovePropiedad.description_propiedad_approve%>','<%=ApprovePropiedad.modena_approve%>','<%=ApprovePropiedad.category_propiedad_approve%>','<%=ApprovePropiedad.province_propiedad_approve%>','<%=ApprovePropiedad.municipios_propiedad_approve%>','<%=ApprovePropiedad.images_propiedad_approve%>','<%= ApprovePropiedad.destacado_propiedad_approve %>')">Editar</a> -->
                                                     <a class="dropdown-item" data-toggle="modal"
                                                         data-target="#editarPropiedadApprove"
-                                                        onclick="editData('<%=ApprovePropiedad.id_propiedad_approve %>')">
+                                                        onclick="editData('<%=ApprovePropiedad.id_propiedad_approve %>','<%=ApprovePropiedad.province_propiedad_approve %>')">
+                                            
                                                         editar</a>
                                                     <a class="dropdown-item"
                                                         href="/delete-propiedad/<%=  ApprovePropiedad.id_propiedad_approve %>">Eliminar</a>
@@ -591,7 +592,9 @@
                             // });
                                 </script>
 
-                                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                                <script src="/js/Axios.js"></script>
+
+                                <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
                                 <script src="/assets/js/provincias.js"></script>
                                 <!-- <script src="/assets/js/editor.js"></script> -->
                                 <script src="/assets/js/aprobar_propiedad.js"></script>
@@ -611,7 +614,7 @@
 
                                     let form_edit_approve = document.getElementById("form_propiedades_edit_approve");
                                     // let url_api = "";
-                                    const editData = async (id_data) => {
+                                    const editData = async (id_data,provincias_local) => {
                                         let nombreProvincia = "";
                                         let nombreMunicipio = "";
                                         let allProvincias = [];
@@ -701,11 +704,11 @@
                                                     <label for="provincia">Provincias:</label>
                                                    <!-- <select class="form-control" id="provinciaEditar_edit" value=${data[0].province_propiedad_approve} name="provincias" onchange="obtener_municipios(document.getElementById('provinciaEditar_edit').value,document.getElementById('municipioEditar_edit'))" data-target="municipioEditar" required>
                                                     </select> -->
-                                                    <select class="form-control"  name="provincias" required>
+                                                    <select class="form-control" onchange="LlenarCamposAutomaticamente()" id="provinces_edit_admin"  name="provincias" required>
                                                         
                                                         ${allProvincias.map(element => element ==  data[0].province_propiedad_approve ?
-                                                            `<option disabled selected value=${codigo}> ${data[0].province_propiedad_approve} </option>`:
-                                                            `<option  value=${element.codigoProvincia}> ${element.nombreProv} </option>`
+                                                            `<option disabled selected value=${codigo}>${data[0].province_propiedad_approve}</option>`:
+                                                            `<option value=${element.codigoProvincia}>${element.nombreProv}</option>`
                                                             )}
                                                     </select>
                                                     <small class="form-text text-muted">Por favor seleccione la provincia.</small>
@@ -713,8 +716,8 @@
 
                                                 <div class="form-group" id="municipioContainer">
                                                     <label for="municipio">Municipios:</label>
-                                                    <select class="form-control" name="municipios">
-                                                        <!-- <select class="form-control" name="municipios"> -->
+                                                    <select id="municipes_edit_admin" class="form-control" name="municipios">
+                                                        <!-- <select id="municipes_edit_admin" class="form-control" name="municipios"> -->
                                                         
                                                       ${  allMunicipios.map(element => element == data[0].municipios_propiedad_approve ?
                                                         `<option  disabled value=${data[0].municipios_propiedad_approve} selected >${data[0].municipios_propiedad_approve}</option>`:
@@ -814,7 +817,10 @@
   }
 });
  
-                                    }
+
+EditarPropiedades(provincias_local);
+
+}
                                     
                                 </script>
 
@@ -1061,3 +1067,89 @@
                                                 <button type="submit" class="btn btn-primary">Guardar</button>
                                     `;
                                 </script>
+
+
+<% if(user_rol=='Administrador'){ %>
+
+
+    <script>
+
+
+
+        function LlenarCamposAutomaticamente(){
+
+        let selectElement = document.getElementById('provinces_edit_admin');
+        let selectedOption = selectElement.options[selectElement.selectedIndex];
+        let textoSeleccionado = selectedOption.textContent;
+
+        console.log(textoSeleccionado);
+
+        let rellenar = document.getElementById('municipes_edit_admin');
+
+        rellenar.innerHTML = ``;
+        
+
+        // Make a request for a user with a given ID
+        axios.get('/apiv1/GetallForName/'+textoSeleccionado)
+        .then(function (response) {
+            // handle success
+
+
+            response.data.forEach(element => {
+                rellenar.innerHTML += `<option value="${element.nombre_municipio}">${element.nombre_municipio}</option>`;
+            });
+
+            rellenar.selectedIndex = 0;
+
+            console.log(response);
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .finally(function () {
+            // always executed
+        });
+
+        }
+
+
+    </script>
+
+
+
+    <script>
+
+        function posicionarSelectPorTexto(selectId, opcionTexto) {
+        // Obtén la referencia al elemento select por su id
+        var selectElement = document.getElementById(selectId);
+
+        console.log(selectElement);
+
+        if (selectElement) {
+            // Encuentra la opción que contiene el texto especificado
+            var opciones = selectElement.options;
+            for (var i = 0; i < opciones.length; i++) {
+            if (opciones[i].text === opcionTexto) {
+                // Establece la opción seleccionada
+                opciones[i].selected = true;
+
+                // Utiliza scrollIntoView() para posicionar el select en la vista
+                selectElement.scrollIntoView();
+                break;
+            }
+            }
+        }
+        }
+
+        // Ejemplo de uso
+        //posicionarSelectPorTexto("provinciaAgregarAprobada", "Azua");
+
+
+        function EditarPropiedades(provincia) {
+            posicionarSelectPorTexto('provinces_edit_admin',provincia)
+        }
+
+    </script>
+
+<% } %>
